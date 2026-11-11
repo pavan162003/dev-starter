@@ -1,0 +1,26 @@
+info:
+  name: Create Item
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/items"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Created from Bruno"
+      }
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Item is created successfully", function() {
+          expect(res.status).to.equal(201);
+          expect(res.body.item.name).to.equal("Created from Bruno");
+        });
